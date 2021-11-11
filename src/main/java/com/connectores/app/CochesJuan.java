@@ -12,7 +12,7 @@ public class CochesJuan {
     public static void main(String[] args) throws SQLException {
         LoginBaseDatos lb = new LoginBaseDatos();
         if (lb.existeUsuario("juan", "Hola")) {
-            System.out.println("Bienvenido a muebles Juan");
+            System.out.println("Bienvenido a coches Juan");
             int eleccion = 0;
             boolean seguir = true;
 
@@ -23,6 +23,7 @@ public class CochesJuan {
                         " 3: Eliminar usuario\n" +
                         " 4: Modificar usuario\n" +
                         " 5: Media de edad de usuarios\n" +
+                        " 6: Usuarios registrados\n" +
                         " 10: Salir");
                 Scanner sc = new Scanner(System.in);
                 eleccion = sc.nextInt();
@@ -57,6 +58,9 @@ public class CochesJuan {
                         break;
                     case 5:
                         lb.edadMedia();
+                        break;
+                    case 6:
+                        lb.usuariosRegistrados();
                         break;
                     case 10:
                         seguir = false;

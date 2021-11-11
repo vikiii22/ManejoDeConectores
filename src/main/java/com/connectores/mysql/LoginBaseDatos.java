@@ -92,4 +92,13 @@ public class LoginBaseDatos {
             System.out.println("La media de edad de los compradores es: " + rs.getInt(1) + " años");
         }
     }
+
+    public void usuariosRegistrados() throws SQLException {
+        String sql="SELECT COUNT(idUser) FROM manejoconectores.users;";
+        Statement statement= con.createStatement();
+        ResultSet rs=statement.executeQuery(sql);
+        if (rs.next()){
+            System.out.println("La cantidad de usuarios registrados es: " + rs.getInt(1));
+        }
+    }
 }
