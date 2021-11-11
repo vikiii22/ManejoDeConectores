@@ -31,6 +31,7 @@ public class LoginBaseDatos {
             login.setName(rs.getString("name"));
             login.setPais(rs.getString("pais"));
             login.setEdad(rs.getInt("edad"));
+            login.setPassword(rs.getString("password"));
             logins.add(login);
         }
         return logins;
@@ -41,7 +42,7 @@ public class LoginBaseDatos {
         PreparedStatement statement=con.prepareStatement(sql);
         for (Login login:getLogins()) {
             System.out.println("---------------------------------");
-            System.out.println("|"+login.getIdUser() + " " + login.getName() + " " + login.getPais() + " " + login.getEdad());
+            System.out.println("|"+login.getIdUser() + " " + login.getName() + " " + login.getPais() + " " + login.getEdad() + " " + login.getPassword());
             System.out.println("---------------------------------");
         }
         statement.executeQuery(sql);
@@ -58,9 +59,9 @@ public class LoginBaseDatos {
         statement.executeQuery(sql);
     }
 
-    public void crearUsuario(String user, String pais, int edad) throws SQLException {
-        String sql="INSERT INTO manejoconectores.users(name, pais, edad)\n" +
-                "\tVALUES(\""+ user + "\", \""+ pais +"\", "+edad+");";
+    public void crearUsuario(String user, String password, String pais, int edad) throws SQLException {
+        String sql="INSERT INTO manejoconectores.users(name, password, pais, edad)\n" +
+                "\tVALUES(\""+user+"\", \""+password+"\", \""+pais+"\", "+edad+");";
         PreparedStatement statement=con.prepareStatement(sql);
         statement.executeUpdate(sql);
     }

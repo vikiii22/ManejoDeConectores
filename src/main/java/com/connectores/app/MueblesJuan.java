@@ -26,13 +26,16 @@ public class MueblesJuan {
                 System.out.print("Introduce el nombre: ");
                 String nombre=sc.next();
                 System.out.println("------------");
+                System.out.print("Introduce la contraseña: ");
+                String password=sc.next();
+                System.out.println("------------");
                 System.out.print("Introduce el pais: ");
                 String pais=sc.next();
                 System.out.println("------------");
                 System.out.print("Introduce la edad: ");
                 int edad=sc.nextInt();
 
-                lb.crearUsuario(nombre, pais, edad);
+                lb.crearUsuario(nombre, password, pais, edad);
                 break;
             case 3:
                 System.out.println("Elimina usuario");

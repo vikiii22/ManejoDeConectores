@@ -5,12 +5,14 @@ public class Login {
     String name;
     String pais;
     int edad;
+    String password;
 
-    public Login(int idUser, String name, String pais, int edad) {
+    public Login(int idUser, String name, String pais, int edad, String password) {
         this.idUser = idUser;
         this.name = name;
         this.pais = pais;
         this.edad = edad;
+        this.password = password;
     }
 
     public Login() {
@@ -46,5 +48,13 @@ public class Login {
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
