@@ -101,4 +101,6 @@ public class LoginBaseDatos {
             System.out.println("La cantidad de usuarios registrados es: " + rs.getInt(1));
         }
     }
+
+    /*Cerca busqueda por dato, tipo, por nombre o id*/
 }
