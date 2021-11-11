@@ -47,7 +47,5 @@ public class MueblesJuan {
                 System.out.println("No válido");
                 break;
         }
-        /*lb.verTodo();
-        lb.userLog("juan");*/
     }
 }

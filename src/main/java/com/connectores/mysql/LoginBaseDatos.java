@@ -66,11 +66,11 @@ public class LoginBaseDatos {
         statement.executeUpdate(sql);
     }
 
-    /**TODO
+    /*TODO
      * Eliminar usuario
      */
 
-    /**TODO
+    /*TODO
      * Modificar usuario
      */
 }
