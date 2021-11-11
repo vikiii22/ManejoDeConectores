@@ -48,17 +48,6 @@ public class LoginBaseDatos {
         statement.executeQuery(sql);
     }
 
-    public void userLog(String user) throws SQLException {
-        String sql="SELECT * FROM manejoconectores.users WHERE name="+"\"" + user + "\"";
-        PreparedStatement statement=con.prepareStatement(sql);
-        for (Login login:getLogins()){
-            if (user.equals(login.getName())){
-                System.out.println("Existe");
-            }
-        }
-        statement.executeQuery(sql);
-    }
-
     public void crearUsuario(String user, String password, String pais, int edad) throws SQLException {
         String sql="INSERT INTO manejoconectores.users(name, password, pais, edad)\n" +
                 "\tVALUES(\""+user+"\", \""+password+"\", \""+pais+"\", "+edad+");";
@@ -66,11 +55,30 @@ public class LoginBaseDatos {
         statement.executeUpdate(sql);
     }
 
-    /*TODO
-     * Eliminar usuario
-     */
+    public Boolean existeUsuario(String user, String password) throws SQLException {
+        boolean existe=false;
+        for (Login login:getLogins()){
+            if (login.getName().equals(user) && login.getPassword().equals(password)){
+                existe=true;
+            }
+        }
+        return existe;
+    }
 
-    /*TODO
-     * Modificar usuario
-     */
+    public void eliminarUsuario(int id) throws SQLException {
+        String sql="DELETE FROM manejoconectores.users WHERE idUser = "+id+";";
+        for (Login login:getLogins()){
+            if (login.getIdUser()==id){
+                PreparedStatement statement= con.prepareStatement(sql);
+                statement.executeUpdate(sql);
+            }
+        }
+        System.out.println("Eliminado con éxito");
+    }
+
+    public void modificarUsuario(int id, String name, String pais, int edad, String password) throws SQLException {
+        String sql="";
+        PreparedStatement statement= con.prepareStatement(sql);
+        statement.executeUpdate(sql);
+    }
 }
