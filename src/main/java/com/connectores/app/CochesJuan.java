@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /*app gestión de compras de coches y envío tipo Tesla*/
 
-public class MueblesJuan {
+public class CochesJuan {
     public static void main(String[] args) throws SQLException {
         LoginBaseDatos lb = new LoginBaseDatos();
         if (lb.existeUsuario("juan", "Hola")) {
@@ -22,6 +22,7 @@ public class MueblesJuan {
                         " 2: Crear ususario\n" +
                         " 3: Eliminar usuario\n" +
                         " 4: Modificar usuario\n" +
+                        " 5: Media de edad de usuarios\n" +
                         " 10: Salir");
                 Scanner sc = new Scanner(System.in);
                 eleccion = sc.nextInt();
@@ -51,7 +52,11 @@ public class MueblesJuan {
                         lb.eliminarUsuario(id);
                         break;
                     case 4:
-                        System.out.println("Modifica usuario");
+                        /*Añadir sc con cada campo para añadirlo el usuario*/
+                        lb.modificarUsuario(11, "Julian", "España", 22, "contraseña");
+                        break;
+                    case 5:
+                        lb.edadMedia();
                         break;
                     case 10:
                         seguir = false;
@@ -62,7 +67,7 @@ public class MueblesJuan {
                 }
             }
         } else {
-            System.out.println("Hasta luego");
+            System.out.println("Usuario no registrado, hasta luego");
         }
     }
 }
