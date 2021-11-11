@@ -6,6 +6,8 @@ import com.connectores.mysql.LoginBaseDatos;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+/*app gestión de compras de coches y envío tipo Tesla*/
+
 public class MueblesJuan {
     public static void main(String[] args) throws SQLException {
         LoginBaseDatos lb = new LoginBaseDatos();
