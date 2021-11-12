@@ -69,7 +69,7 @@ public class Login {
     }
 
     public void getAll(){
-        System.out.println("ID: " + idUser + "\n Nombre: " + name + "\n Pais: " + pais + "\n Edad: " + edad + "\n Pass: " +
-                "" + password + "\n Modelo: " + modelo);
+        System.out.println("ID: " + idUser + "\nNombre: " + name + "\nPais envío: " + pais + "\nEdad: " + edad + "\nPass: " +
+                "" + password + "\nModelo: " + modelo);
     }
 }
