@@ -11,7 +11,14 @@ import java.util.Scanner;
 public class CochesJuan {
     public static void main(String[] args) throws SQLException {
         LoginBaseDatos lb = new LoginBaseDatos();
-        if (lb.existeUsuario("juan", "Hola")) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Nombre usuario: ");
+        String usuario= sc.nextLine();
+        System.out.print("Contraseña: ");
+        String contrasenya= sc.next();
+
+        if (lb.existeUsuario(usuario, contrasenya)) {
             System.out.println("Bienvenido a coches Juan");
             int eleccion = 0;
             boolean seguir = true;
@@ -24,8 +31,12 @@ public class CochesJuan {
                         " 4: Modificar usuario\n" +
                         " 5: Media de edad de usuarios\n" +
                         " 6: Usuarios registrados\n" +
-                        " 10: Salir");
-                Scanner sc = new Scanner(System.in);
+                        " 7: Mi zona de envio\n" +
+                        " 8: Modificar Vehiculo seleccionado\n" +
+                        " 9: Localizar mi ID\n" +
+                        " 10: Buscar por ID\n" +
+                        " 11: Salir");
+
                 eleccion = sc.nextInt();
 
                 switch (eleccion) {
@@ -34,13 +45,14 @@ public class CochesJuan {
                         break;
                     case 2:
                         System.out.print("Introduce el nombre: ");
-                        String nombre = sc.next();
+                        sc.nextLine();
+                        String nombre = sc.nextLine();
                         System.out.println("------------");
                         System.out.print("Introduce la contraseña: ");
-                        String password = sc.next();
+                        String password = sc.nextLine();
                         System.out.println("------------");
                         System.out.print("Introduce el pais: ");
-                        String pais = sc.next();
+                        String pais = sc.nextLine();
                         System.out.println("------------");
                         System.out.print("Introduce la edad: ");
                         int edad = sc.nextInt();
@@ -62,7 +74,37 @@ public class CochesJuan {
                     case 6:
                         lb.usuariosRegistrados();
                         break;
+                    case 7:
+                        System.out.print("Nombre: ");
+                        sc.nextLine();
+                        String name=sc.nextLine();
+                        lb.miZonaDeEnvio(name);
+                        try {
+                            Thread.sleep(3000); //Espero tres segundos para que al usuario le de tiempo de ver donde será enviado
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case 8:
+                        System.out.print("Ingresa tu id: ");
+                        int iduser= sc.nextInt();
+                        System.out.print("Ingresa el modelo que deseas: ");
+                        sc.nextLine();
+                        String modelo= sc.nextLine();
+                        lb.modificarVehiculoSeleccionado(iduser, modelo);
+                        break;
+                    case 9:
+                        System.out.print("Introduce tu nombre: ");
+                        sc.nextLine();
+                        String miNombre= sc.nextLine();
+                        lb.localizarMiID(miNombre);
+                        break;
                     case 10:
+                        System.out.print("Introduce tu id: ");
+                        int miId= sc.nextInt();
+                        lb.busquedaPorID(miId);
+                        break;
+                    case 11:
                         seguir = false;
                         break;
                     default:

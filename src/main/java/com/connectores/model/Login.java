@@ -6,13 +6,15 @@ public class Login {
     String pais;
     int edad;
     String password;
+    String modelo;
 
-    public Login(int idUser, String name, String pais, int edad, String password) {
+    public Login(int idUser, String name, String pais, int edad, String password, String modelo) {
         this.idUser = idUser;
         this.name = name;
         this.pais = pais;
         this.edad = edad;
         this.password = password;
+        this.modelo=modelo;
     }
 
     public Login() {
@@ -56,5 +58,18 @@ public class Login {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public void getAll(){
+        System.out.println("ID: " + idUser + "\n Nombre: " + name + "\n Pais: " + pais + "\n Edad: " + edad + "\n Pass: " +
+                "" + password + "\n Modelo: " + modelo);
     }
 }
