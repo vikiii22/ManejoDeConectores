@@ -198,8 +198,5 @@ public class LoginBaseDatos {
         } catch (SQLException | InterruptedException e) {
             e.printStackTrace();
         }
-
     }
-
-    /*Cerca busqueda por dato, tipo, por nombre o id*/
 }
