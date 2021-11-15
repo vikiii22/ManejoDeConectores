@@ -19,6 +19,21 @@ public class LoginBaseDatos {
         }
     }
 
+    public List<Login> getAdmins() throws SQLException {
+        String sql = "SELECT * FROM manejoconectores.administradores";
+        Statement statement = con.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+        List<Login> logins = new ArrayList<>();
+
+        while (rs.next()) {
+            Login login = new Login();
+            login.setName(rs.getString("Nombre"));
+            login.setPassword(rs.getString("Password"));
+            logins.add(login);
+        }
+        return logins;
+    }
+
     public List<Login> getLogins() throws SQLException {
         String sql = "SELECT * FROM manejoconectores.users";
         Statement statement = con.createStatement();
@@ -65,6 +80,20 @@ public class LoginBaseDatos {
     }
 
     public Boolean existeUsuario(String user, String password) {
+        boolean existe = false;
+        try {
+            for (Login login : getAdmins()) {
+                if (login.getName().equals(user) && login.getPassword().equals(password)) {
+                    existe = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return existe;
+    }
+
+    public Boolean existeUsuarioNormal(String user, String password) {
         boolean existe = false;
         try {
             for (Login login : getLogins()) {
@@ -185,18 +214,19 @@ public class LoginBaseDatos {
     }
 
     public void busquedaPorID(int id) {
-        String sql = "SELECT * FROM manejoconectores.users WHERE idUser=" + id + ";";
+        String sql = "SELECT name, pais, edad, password, cocheSeleccionado FROM manejoconectores.users WHERE idUser=" + id + ";";
         try {
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
-            for (Login login : getLogins()) {
-                if (rs.next()) {
-                    login.getAll();
-                    Thread.sleep(2000);
-                }
+            Statement statement= con.createStatement();
+            ResultSet rs=statement.executeQuery(sql);
+            if (rs.next()) {
+                System.out.println("Nombre: " + rs.getString(1) + "\n" +
+                        "País: "+rs.getString(2) + "\n" +
+                        "Edad: "+rs.getInt(3) + "\n" +
+                        "Pass: "+rs.getString(4) + "\n" +
+                        "Coche: "+rs.getString(5));
             }
-        } catch (SQLException | InterruptedException e) {
-            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 }
