@@ -117,14 +117,15 @@ public class CochesJuan {
             boolean seguir = true;
             while (seguir) {
                 System.out.println("Que desea hoy? \n" +
-                        " 1: ver todos los datos\n" +
-                        " 11: Salir");
+                        " 1: ver todos tus datos\n" +
+                        " 2: Acción\n" +
+                        " 5: Salir");
 
                 eleccion = sc.nextInt();
 
                 switch (eleccion) {
                     case 1:
-                        lb.verTodo();
+                        lb.verTodoUsuario(usuario);
                         break;
                     case 2:
                         System.out.println("Acción");

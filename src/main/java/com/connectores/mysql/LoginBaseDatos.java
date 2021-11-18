@@ -68,6 +68,24 @@ public class LoginBaseDatos {
         }
     }
 
+    public void verTodoUsuario(String userName) {
+        String sql = "SELECT * FROM manejoconectores.users WHERE name=\"" + userName + "\";";
+        try {
+            Statement statement= con.createStatement();
+            ResultSet rs=statement.executeQuery(sql);
+
+            if (rs.next()){
+                System.out.println("Nombre: " + rs.getString(2)+"\n" +
+                        "País: " + rs.getString(3)+"\n" +
+                        "Edad: " + rs.getInt(4) + "\n" +
+                        "Contraseña: " + rs.getString(5) + "\n" +
+                        "Coche seleccionado: " + rs.getString(6));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void crearUsuario(String user, String password, String pais, int edad) {
         String sql = "INSERT INTO manejoconectores.users(name, password, pais, edad)\n" +
                 "\tVALUES(\"" + user + "\", \"" + password + "\", \"" + pais + "\", " + edad + ");";
@@ -216,14 +234,14 @@ public class LoginBaseDatos {
     public void busquedaPorID(int id) {
         String sql = "SELECT name, pais, edad, password, cocheSeleccionado FROM manejoconectores.users WHERE idUser=" + id + ";";
         try {
-            Statement statement= con.createStatement();
-            ResultSet rs=statement.executeQuery(sql);
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
             if (rs.next()) {
                 System.out.println("Nombre: " + rs.getString(1) + "\n" +
-                        "País: "+rs.getString(2) + "\n" +
-                        "Edad: "+rs.getInt(3) + "\n" +
-                        "Pass: "+rs.getString(4) + "\n" +
-                        "Coche: "+rs.getString(5));
+                        "País: " + rs.getString(2) + "\n" +
+                        "Edad: " + rs.getInt(3) + "\n" +
+                        "Pass: " + rs.getString(4) + "\n" +
+                        "Coche: " + rs.getString(5));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
