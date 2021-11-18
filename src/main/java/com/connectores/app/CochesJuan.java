@@ -31,11 +31,11 @@ public class CochesJuan {
                         " 4: Modificar usuario\n" +
                         " 5: Media de edad de usuarios\n" +
                         " 6: Usuarios registrados\n" +
-                        " 7: Mi zona de envio\n" +
-                        " 8: Modificar Vehiculo seleccionado\n" +
-                        " 9: Localizar mi ID\n" +
-                        " 10: Buscar por ID\n" +
-                        " 11: Salir");
+                        " 7: Modificar Vehiculo seleccionado\n" +
+                        " 8: Localizar mi ID\n" +
+                        " 9: Buscar por ID\n" +
+                        " 10: Salir\n" +
+                        " 11: Eliminar todo");
 
                 eleccion = sc.nextInt();
 
@@ -75,17 +75,6 @@ public class CochesJuan {
                         lb.usuariosRegistrados();
                         break;
                     case 7:
-                        System.out.print("Nombre: ");
-                        sc.nextLine();
-                        String name = sc.nextLine();
-                        lb.miZonaDeEnvio(name);
-                        try {
-                            Thread.sleep(3000); //Espero tres segundos para que al usuario le de tiempo de ver donde será enviado
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case 8:
                         System.out.print("Ingresa tu id: ");
                         int iduser = sc.nextInt();
                         System.out.print("Ingresa el modelo que deseas: ");
@@ -93,19 +82,23 @@ public class CochesJuan {
                         String modelo = sc.nextLine();
                         lb.modificarVehiculoSeleccionado(iduser, modelo);
                         break;
-                    case 9:
+                    case 8:
                         System.out.print("Introduce tu nombre: ");
                         sc.nextLine();
                         String miNombre = sc.nextLine();
                         lb.localizarMiID(miNombre);
                         break;
-                    case 10:
+                    case 9:
                         System.out.print("Introduce tu id: ");
                         int miId = sc.nextInt();
                         lb.busquedaPorID(miId);
                         break;
-                    case 11:
+                    case 10:
                         seguir = false;
+                        System.out.println("Hasta luego");
+                        break;
+                    case 11:
+                        lb.eliminarTodo();
                         break;
                     default:
                         System.out.println("No válido");
@@ -118,7 +111,7 @@ public class CochesJuan {
             while (seguir) {
                 System.out.println("Que desea hoy? \n" +
                         " 1: ver todos tus datos\n" +
-                        " 2: Acción\n" +
+                        " 2: Mi zona de envío\n" +
                         " 5: Salir");
 
                 eleccion = sc.nextInt();
@@ -128,10 +121,16 @@ public class CochesJuan {
                         lb.verTodoUsuario(usuario);
                         break;
                     case 2:
-                        System.out.println("Acción");
+                        lb.miZonaDeEnvio(usuario);
+                        try {
+                            Thread.sleep(3000); //Espero tres segundos para que al usuario le de tiempo de ver donde será enviado
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         break;
                     case 5:
                         seguir = false;
+                        System.out.println("Hasta luego");
                         break;
                 }
             }
