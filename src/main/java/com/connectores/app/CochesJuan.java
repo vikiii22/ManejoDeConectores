@@ -72,10 +72,10 @@ public class CochesJuan {
                         System.out.print("Introduce el país: ");
                         String paisAModificar = sc.nextLine();
                         System.out.print("Introduce tu edad: ");
-                        int edadAModificar= sc.nextInt();
+                        int edadAModificar = sc.nextInt();
                         System.out.print("Introduce tu contraseña nueva: ");
                         sc.nextLine();
-                        String contrasenyaAModificar=sc.nextLine();
+                        String contrasenyaAModificar = sc.nextLine();
 
                         lb.modificarUsuario(idAModificar, nombreAModificar, paisAModificar, edadAModificar, contrasenyaAModificar);
                         break;
@@ -103,7 +103,14 @@ public class CochesJuan {
                         System.out.println("Hasta luego");
                         break;
                     case 10:
-                        lb.eliminarTodo();
+                        System.out.print("¿Seguro?: ");
+                        sc.nextLine();
+                        String opcion = sc.nextLine();
+                        if (opcion.toLowerCase().equals("si")) {
+                            lb.eliminarTodo();
+                        }else{
+                            System.out.println("Mejor");
+                        }
                         break;
                     default:
                         System.out.println("No válido");
@@ -130,7 +137,8 @@ public class CochesJuan {
                     case 2:
                         lb.miZonaDeEnvio(usuario);
                         try {
-                            Thread.sleep(3000); //Espero tres segundos para que al usuario le de tiempo de ver donde será enviado
+                            Thread.sleep(3000); //Espero tres segundos para que al usuario le de tiempo de ver donde será enviado, lo pongo solo para mostrarlo por consola
+                            //para que no se vea el menú tan rápido.
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
