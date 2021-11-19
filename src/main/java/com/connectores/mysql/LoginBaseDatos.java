@@ -198,7 +198,13 @@ public class LoginBaseDatos {
     }
 
     public void eliminarTodo() {
-        System.out.println("Seguro?");
+        String sql="TRUNCATE TABLE manejoconectores.users";
+        try {
+            PreparedStatement statement= con.prepareStatement(sql);
+            statement.executeQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void modificarVehiculoSeleccionado(int id, String modelo) {

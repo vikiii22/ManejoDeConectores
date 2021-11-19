@@ -32,10 +32,9 @@ public class CochesJuan {
                         " 5: Media de edad de usuarios\n" +
                         " 6: Usuarios registrados\n" +
                         " 7: Modificar Vehiculo seleccionado\n" +
-                        " 8: Localizar mi ID\n" +
-                        " 9: Buscar por ID\n" +
-                        " 10: Salir\n" +
-                        " 11: Eliminar todo");
+                        " 8: Buscar por ID\n" +
+                        " 9: Salir\n" +
+                        " 10: Eliminar todo");
 
                 eleccion = sc.nextInt();
 
@@ -65,8 +64,20 @@ public class CochesJuan {
                         lb.eliminarUsuario(id);
                         break;
                     case 4:
-                        /*Añadir sc con cada campo para añadirlo el usuario*/
-                        lb.modificarUsuario(11, "Julian", "España", 22, "contraseña");
+                        System.out.print("Introduce tu id: ");
+                        int idAModificar = sc.nextInt();
+                        System.out.print("Introduce el nombre: ");
+                        sc.nextLine();
+                        String nombreAModificar = sc.nextLine();
+                        System.out.print("Introduce el país: ");
+                        String paisAModificar = sc.nextLine();
+                        System.out.print("Introduce tu edad: ");
+                        int edadAModificar= sc.nextInt();
+                        System.out.print("Introduce tu contraseña nueva: ");
+                        sc.nextLine();
+                        String contrasenyaAModificar=sc.nextLine();
+
+                        lb.modificarUsuario(idAModificar, nombreAModificar, paisAModificar, edadAModificar, contrasenyaAModificar);
                         break;
                     case 5:
                         lb.edadMedia();
@@ -75,7 +86,7 @@ public class CochesJuan {
                         lb.usuariosRegistrados();
                         break;
                     case 7:
-                        System.out.print("Ingresa tu id: ");
+                        System.out.print("Ingresa id del usuario: ");
                         int iduser = sc.nextInt();
                         System.out.print("Ingresa el modelo que deseas: ");
                         sc.nextLine();
@@ -83,21 +94,15 @@ public class CochesJuan {
                         lb.modificarVehiculoSeleccionado(iduser, modelo);
                         break;
                     case 8:
-                        System.out.print("Introduce tu nombre: ");
-                        sc.nextLine();
-                        String miNombre = sc.nextLine();
-                        lb.localizarMiID(miNombre);
-                        break;
-                    case 9:
-                        System.out.print("Introduce tu id: ");
+                        System.out.print("Introduce el id: ");
                         int miId = sc.nextInt();
                         lb.busquedaPorID(miId);
                         break;
-                    case 10:
+                    case 9:
                         seguir = false;
                         System.out.println("Hasta luego");
                         break;
-                    case 11:
+                    case 10:
                         lb.eliminarTodo();
                         break;
                     default:
@@ -112,6 +117,8 @@ public class CochesJuan {
                 System.out.println("Que desea hoy? \n" +
                         " 1: ver todos tus datos\n" +
                         " 2: Mi zona de envío\n" +
+                        " 3: Localizar mi ID\n" +
+                        " 4: \n" +
                         " 5: Salir");
 
                 eleccion = sc.nextInt();
@@ -128,6 +135,12 @@ public class CochesJuan {
                             e.printStackTrace();
                         }
                         break;
+                    case 3:
+                        lb.localizarMiID(usuario);
+                        break;
+                    case 4:
+                        System.out.println("ALgo");
+                        break;
                     case 5:
                         seguir = false;
                         System.out.println("Hasta luego");
@@ -138,8 +151,8 @@ public class CochesJuan {
             System.out.println("Usuario no administrador o no registrado, hasta luego");
             System.out.println("Desea registrar un nuevo usuario?");
             sc.nextLine();
-            String nuevo=sc.nextLine();
-            if (nuevo.equals("Si") || nuevo.equals("si")){
+            String nuevo = sc.nextLine();
+            if (nuevo.equals("Si") || nuevo.equals("si")) {
                 System.out.print("Introduce el nombre: ");
                 String nombre = sc.nextLine();
                 System.out.println("------------");
@@ -153,7 +166,7 @@ public class CochesJuan {
                 int edad = sc.nextInt();
 
                 lb.crearUsuario(nombre, password, pais, edad);
-            }else {
+            } else {
                 System.out.println("De acuerdo, hasta luego");
             }
         }
