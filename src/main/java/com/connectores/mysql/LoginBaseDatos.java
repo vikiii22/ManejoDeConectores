@@ -2,7 +2,10 @@ package com.connectores.mysql;
 
 import com.connectores.model.Login;
 import com.connectores.util.DatabaseConnection;
+import com.google.gson.Gson;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -251,6 +254,23 @@ public class LoginBaseDatos {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+    }
+
+    public void exportarAJson(){
+        StringBuilder usuario = new StringBuilder();
+        try {
+            for (Login login:getLogins()){
+                Gson gson=new Gson();
+                Login usu=new Login(login.getIdUser(), login.getName(), login.getPais(), login.getEdad(), login.getPassword(), login.getModelo());
+                usuario.append(gson.toJson(usu));
+            }
+            BufferedWriter bw=new BufferedWriter(new FileWriter("D:\\Documents\\2DAM\\AccesoADatos\\Apuntes\\usuarios.json"));
+            bw.write(usuario.toString());
+            bw.close();
+            System.out.println("Lista exportada");
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
         }
     }
 }

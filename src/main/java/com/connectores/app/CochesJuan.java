@@ -34,7 +34,8 @@ public class CochesJuan {
                         " 7: Modificar Vehiculo seleccionado\n" +
                         " 8: Buscar por ID\n" +
                         " 9: Salir\n" +
-                        " 10: Eliminar todo");
+                        " 10: Eliminar todo\n" +
+                        " 11: Exportar lista a JSON");
 
                 eleccion = sc.nextInt();
 
@@ -111,6 +112,9 @@ public class CochesJuan {
                         }else{
                             System.out.println("Mejor");
                         }
+                        break;
+                    case 11:
+                        lb.exportarAJson();
                         break;
                     default:
                         System.out.println("No válido");
