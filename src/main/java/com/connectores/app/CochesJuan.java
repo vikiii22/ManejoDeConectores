@@ -1,12 +1,11 @@
 package com.connectores.app;
 
-import com.connectores.model.Login;
 import com.connectores.mysql.LoginBaseDatos;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 
-/*app gestión de compras de coches y envío tipo Tesla*/
+/*app gestión de compras de coches y envío tipo Tesla sensillo*/
 
 public class CochesJuan {
     public static void main(String[] args) throws SQLException {
@@ -18,7 +17,7 @@ public class CochesJuan {
         System.out.print("Contraseña: ");
         String contrasenya = sc.next();
 
-        if (lb.existeUsuario(usuario, contrasenya)) {
+        if (lb.existeAdmin(usuario, contrasenya)) {
             System.out.println("Bienvenido a coches Juan");
             int eleccion = 0;
             boolean seguir = true;
@@ -129,8 +128,7 @@ public class CochesJuan {
                         " 1: ver todos tus datos\n" +
                         " 2: Mi zona de envío\n" +
                         " 3: Localizar mi ID\n" +
-                        " 4: \n" +
-                        " 5: Salir");
+                        " 4: Salir");
 
                 eleccion = sc.nextInt();
 
@@ -151,9 +149,6 @@ public class CochesJuan {
                         lb.localizarMiID(usuario);
                         break;
                     case 4:
-                        System.out.println("ALgo");
-                        break;
-                    case 5:
                         seguir = false;
                         System.out.println("Hasta luego");
                         break;

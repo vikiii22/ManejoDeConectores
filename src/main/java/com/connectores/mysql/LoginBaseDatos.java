@@ -3,10 +3,10 @@ package com.connectores.mysql;
 import com.connectores.model.Login;
 import com.connectores.util.DatabaseConnection;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Type;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,12 +95,18 @@ public class LoginBaseDatos {
         try {
             PreparedStatement statement = con.prepareStatement(sql);
             statement.executeUpdate(sql);
+            int lineas=statement.executeUpdate();
+            if (lineas==4){
+                con.commit();
+            }else{
+                con.rollback();
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("No se ha podido crear el usuario");
         }
     }
 
-    public Boolean existeUsuario(String user, String password) {
+    public Boolean existeAdmin(String user, String password) {
         boolean existe = false;
         try {
             for (Login login : getAdmins()) {
@@ -135,10 +141,17 @@ public class LoginBaseDatos {
                 if (login.getIdUser() == id) {
                     PreparedStatement statement = con.prepareStatement(sql);
                     statement.executeUpdate(sql);
+                    int lineas=statement.executeUpdate();
+                    if (lineas==1){
+                        con.commit();
+                    }else{
+                        con.rollback();
+                    }
                 }
             }
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Usuario no existente");
         }
         System.out.println("Eliminado con éxito");
     }
@@ -206,7 +219,7 @@ public class LoginBaseDatos {
             PreparedStatement statement= con.prepareStatement(sql);
             statement.executeQuery(sql);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("No se ha podido eliminar");
         }
     }
 
@@ -218,7 +231,7 @@ public class LoginBaseDatos {
             statement.executeUpdate(sql);
             System.out.println("Vehículo modificado con éxtio");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("No se ha podido modificar el vehículo");
         }
     }
 
@@ -258,15 +271,15 @@ public class LoginBaseDatos {
     }
 
     public void exportarAJson(){
-        StringBuilder usuario = new StringBuilder();
         try {
+            Gson gson=new Gson();
+            List<Login>logins=new ArrayList<>();
+            BufferedWriter bw=new BufferedWriter(new FileWriter(".\\usuarios.json"));
             for (Login login:getLogins()){
-                Gson gson=new Gson();
                 Login usu=new Login(login.getIdUser(), login.getName(), login.getPais(), login.getEdad(), login.getPassword(), login.getModelo());
-                usuario.append(gson.toJson(usu));
+                logins.add(usu);
             }
-            BufferedWriter bw=new BufferedWriter(new FileWriter("D:\\Documents\\2DAM\\AccesoADatos\\Apuntes\\usuarios.json"));
-            bw.write(usuario.toString());
+            gson.toJson(logins, bw);
             bw.close();
             System.out.println("Lista exportada");
         } catch (SQLException | IOException e) {
